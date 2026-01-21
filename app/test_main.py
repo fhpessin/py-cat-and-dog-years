@@ -34,34 +34,35 @@ def test_get_human_age_examples(
 
 
 @pytest.mark.parametrize(
-    "cat_age, expected_cat_human_age",
+    "cat_age, dog_age",
     [
-        (15, 1),
-        (24, 2),
-        (28, 3),
-        (32, 4),
+        (-1, 5),
+        (5, -1),
+        (-10, -10),
     ],
-    ids=["cat_15_to_1", "cat_24_to_2", "cat_28_to_3", "cat_32_to_4"]
+    ids=["negative_cat", "negative_dog", "both_negative"]
 )
-def test_cat_age_conversion(
+def test_get_human_age_with_negative_numbers(
     cat_age: int,
-    expected_cat_human_age: int
+    dog_age: int
 ) -> None:
-    assert get_human_age(cat_age, 0)[0] == expected_cat_human_age
+    # Geralmente, idade negativa deve retornar [0, 0] ou levantar erro
+    # Ajuste o assert conforme o comportamento esperado da sua função
+    assert get_human_age(cat_age, dog_age) == [0, 0]
 
 
 @pytest.mark.parametrize(
-    "dog_age, expected_dog_human_age",
+    "cat_age, dog_age",
     [
-        (15, 1),
-        (24, 2),
-        (29, 3),
-        (34, 4),
+        ("10", 10),
+        (10, "10"),
+        ([10], 10),
     ],
-    ids=["dog_15_to_1", "dog_24_to_2", "dog_29_to_3", "dog_34_to_4"]
+    ids=["string_cat", "string_dog", "list_input"]
 )
-def test_dog_age_conversion(
-    dog_age: int,
-    expected_dog_human_age: int
+def test_get_human_age_raises_type_error(
+    cat_age: any,
+    dog_age: any
 ) -> None:
-    assert get_human_age(0, dog_age)[1] == expected_dog_human_age
+    with pytest.raises(TypeError):
+        get_human_age(cat_age, dog_age)
