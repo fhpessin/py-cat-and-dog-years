@@ -46,8 +46,6 @@ def test_get_human_age_with_negative_numbers(
     cat_age: int,
     dog_age: int
 ) -> None:
-    # Geralmente, idade negativa deve retornar [0, 0] ou levantar erro
-    # Ajuste o assert conforme o comportamento esperado da sua função
     assert get_human_age(cat_age, dog_age) == [0, 0]
 
 
